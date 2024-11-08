@@ -1,11 +1,11 @@
 package REDES.TP2H2.controller;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-@RestController
-@RequestMapping("/host2")
-public class EnlaceHost2 {
+@Service
+public class EnlaceHost2 implements EnlaceHost2Interface{
 
     private static final String FLAG = "01111110";  // Definir el valor de FLAG
     private static final String ESC = "01111101";   // Definir el valor de ESC (escape)
@@ -14,8 +14,8 @@ public class EnlaceHost2 {
 
     private String CRCRecibido;
 
-    @PostMapping("/receive")
-    public String recibirPaquete(@RequestBody String paqueteEntramadoConCRC) {
+    @Override
+    public String recibirPaqueteCapaFisica(String paqueteEntramadoConCRC) {
 
         // Paso 1: Desentramar el paquete recibido
         System.out.println("Paquete recibido en Host 2 (con CRC): " + paqueteEntramadoConCRC);
